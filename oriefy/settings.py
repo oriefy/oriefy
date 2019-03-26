@@ -25,7 +25,7 @@ SECRET_KEY = '4-(4yaf2=cf)#5l&wijox9eq2%pv#%3u3o03c%m0+y$d8p$pcb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['oriefy.herokuapp.com',]
 
 
 # Application definition
