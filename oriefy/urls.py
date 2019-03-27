@@ -16,6 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# Admin Settings
+admin.site.site_header = "Oriefy Admin"
+admin.site.site_title = "Oriefy Admin Portal"
+admin.site.index_title = "Welcome to Oriefy Management Portal"
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
