@@ -87,5 +87,5 @@ class PhoneNumber(models.Model):
     """
     Saves phone numbers of users
     """
-    person      = models.ForeignKey(User, on_delete=models.CASCADE)
+    person      = models.ForeignKey(Employee, on_delete=models.CASCADE)
     number      = models.CharField(max_length=12)
