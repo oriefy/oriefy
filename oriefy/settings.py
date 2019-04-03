@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     #user apps
     'expense',
     'contacts',
+    'ledger',
     'oriefy_site'
 ]
 
