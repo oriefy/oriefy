@@ -7,5 +7,5 @@ class Contact(models.Model):
     """
     name    = models.CharField(max_length=50)
     company = models.CharField(max_length=50)
-    website = models.CharField(max_length=50)
+    website = models.CharField(max_length=50, blank=False)
     
