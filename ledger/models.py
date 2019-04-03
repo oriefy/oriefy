@@ -38,6 +38,7 @@ class Transaction(models.Model):
     debit and credit
     """
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    description = models.TextField()
     amount  = models.PositiveIntegerField(default=0)
     transaction_type = models.CharField(max_length=4, choices=TRANSACTION_TYPES)
     created_at = models.DateTimeField(default=timezone.now, editable=False)
