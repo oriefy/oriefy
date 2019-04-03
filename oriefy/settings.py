@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #user apps
     'expense',
+    'contacts',
     'oriefy_site'
 ]
 
