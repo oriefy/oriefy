@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'employees',
     'expense',
     'contacts',
+    'ledger',
     'oriefy_site'
 ]
 
