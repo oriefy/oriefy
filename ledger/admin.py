@@ -1,6 +1,9 @@
 from django.contrib import admin
 from ledger.models import Account, Transaction
 from django.contrib.admin import site
+from django.db import models
+from django.forms import Textarea
+
 # Register your models here.
 
 class LedgerAdminSite(admin.AdminSite):
@@ -14,7 +17,19 @@ class LedgerAdminSite(admin.AdminSite):
 ledger_admin_site = LedgerAdminSite(name='ledger_admin')
 
 
+class TransactionInline(admin.TabularInline):
+    '''Tabular Inline View for Transaction'''
 
+    formfield_overrides = {
+        models.TextField: {'widget': Textarea(attrs={'rows':1, 'cols':40})},
+    }
+    
+    model = Transaction
+    min_num = 3
+    max_num = 20
+    extra = 1
+    fk_name = 'account'
+    radio_fields = {'transaction_type':admin.HORIZONTAL}
 
 
 @admin.register(Account, site=ledger_admin_site)
@@ -22,11 +37,16 @@ ledger_admin_site = LedgerAdminSite(name='ledger_admin')
 class AccountAdmin(admin.ModelAdmin):
     '''Admin View for Account'''
 
+
     list_display = ('person', 'balance')
 
     raw_id_fields = ('person',)
     search_fields = ('person__name',)
     readonly_fields = ('balance', )
+
+    inlines = [
+        TransactionInline,
+    ]
 
 
 @admin.register(Transaction, site=ledger_admin_site)
@@ -44,3 +64,4 @@ class TransactionAdmin(admin.ModelAdmin):
     search_fields = ('account', 'description')
     date_hierarchy = 'created_at'
     ordering = ('created_at',)
+    radio_fields = {'transaction_type':admin.HORIZONTAL}
