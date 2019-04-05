@@ -11,6 +11,7 @@ class AccountAdmin(admin.ModelAdmin):
 
     raw_id_fields = ('person',)
     search_fields = ('person__name',)
+    readonly_fields = ('balance', )
 
 
 @admin.register(Transaction)
