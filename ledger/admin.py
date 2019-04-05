@@ -20,13 +20,17 @@ ledger_admin_site = LedgerAdminSite(name='ledger_admin')
 class TransactionInline(admin.TabularInline):
     '''Tabular Inline View for Transaction'''
 
+    
+    def get_queryset(self, request):
+        return Transaction.objects.none()
+
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows':1, 'cols':40})},
     }
-
+    
     model = Transaction
-    min_num = 3
-    max_num = 20
+    min_num = 0
+    max_num = 1000
     extra = 1
     fk_name = 'account'
     radio_fields = {'transaction_type':admin.HORIZONTAL}
@@ -42,7 +46,14 @@ class AccountAdmin(admin.ModelAdmin, ExportCsvMixin):
 
     raw_id_fields = ('person',)
     search_fields = ('person__name',)
-    readonly_fields = ('balance', )
+    # readonly_fields = ('balance', )
+
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ["person", "balance",]
+        else:
+            return ["balance"]
 
     inlines = [
         TransactionInline,
