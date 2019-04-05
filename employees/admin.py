@@ -3,6 +3,20 @@ from django.contrib.auth.models import User
 from employees.models import Employee, EducationRecord, RecordImage, PhoneNumber
 
 # Register your models here.
+
+
+
+class EmployeeAdminSite(admin.AdminSite):
+    """
+    Seperate Admin Site for Employees models
+    """
+    site_header = "Oriefy Team Admin"
+    site_title = "Oriefy Team Admin Portal"
+    index_title = "Welcome to Oriefy Team Member Portal"
+
+employee_admin_site = EmployeeAdminSite(name='employee_admin')
+
+
 class PhoneNumberTabularInline(admin.StackedInline):
     """
     Tabuar form for phone numbers to show in Employee admin
@@ -27,7 +41,8 @@ class RecordImageTabularInline(admin.TabularInline):
     fk_name = 'employee'
     extra = 4
 
-@admin.register(Employee)
+@admin.register(Employee, site=employee_admin_site)
+@admin.register(Employee, site=admin.site)
 class EmployeeAdmin(admin.ModelAdmin):
     '''Admin View for Employee'''
     inlines = [

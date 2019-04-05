@@ -1,9 +1,24 @@
 from django.contrib import admin
 from ledger.models import Account, Transaction
-
+from django.contrib.admin import site
 # Register your models here.
 
-@admin.register(Account)
+class LedgerAdminSite(admin.AdminSite):
+    """
+    Seperate Admin Site for Ledgers models
+    """
+    site_header = "Oriefy Finance Team Admin"
+    site_title = "Oriefy Finance Team Admin Portal"
+    index_title = "Welcome to Oriefy Finance Manager Portal"
+
+ledger_admin_site = LedgerAdminSite(name='ledger_admin')
+
+
+
+
+
+@admin.register(Account, site=ledger_admin_site)
+@admin.register(Account, site=site)
 class AccountAdmin(admin.ModelAdmin):
     '''Admin View for Account'''
 
@@ -14,7 +29,8 @@ class AccountAdmin(admin.ModelAdmin):
     readonly_fields = ('balance', )
 
 
-@admin.register(Transaction)
+@admin.register(Transaction, site=ledger_admin_site)
+@admin.register(Transaction, site=site)
 class TransactionAdmin(admin.ModelAdmin):
     '''Admin View for Transaction'''
 

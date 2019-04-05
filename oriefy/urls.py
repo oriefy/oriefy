@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from employees.admin import employee_admin_site
+from ledger.admin import ledger_admin_site
 
 # Admin Settings
 admin.site.site_header = "Oriefy Admin"
@@ -24,5 +26,7 @@ admin.site.index_title = "Welcome to Oriefy Management Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('team/admin', employee_admin_site.urls),
+    path('ledger/', ledger_admin_site.urls),
     path('', include('oriefy_site.urls')),
 ]
