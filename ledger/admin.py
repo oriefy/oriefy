@@ -3,7 +3,7 @@ from ledger.models import Account, Transaction
 from django.contrib.admin import site
 from django.db import models
 from django.forms import Textarea
-
+from oriefy.utils import ExportCsvMixin
 # Register your models here.
 
 class LedgerAdminSite(admin.AdminSite):
@@ -23,7 +23,7 @@ class TransactionInline(admin.TabularInline):
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows':1, 'cols':40})},
     }
-    
+
     model = Transaction
     min_num = 3
     max_num = 20
@@ -34,7 +34,7 @@ class TransactionInline(admin.TabularInline):
 
 @admin.register(Account, site=ledger_admin_site)
 @admin.register(Account, site=site)
-class AccountAdmin(admin.ModelAdmin):
+class AccountAdmin(admin.ModelAdmin, ExportCsvMixin):
     '''Admin View for Account'''
 
 
@@ -48,10 +48,13 @@ class AccountAdmin(admin.ModelAdmin):
         TransactionInline,
     ]
 
+    # Actions
+    actions = ['export_to_csv']
+
 
 @admin.register(Transaction, site=ledger_admin_site)
 @admin.register(Transaction, site=site)
-class TransactionAdmin(admin.ModelAdmin):
+class TransactionAdmin(admin.ModelAdmin, ExportCsvMixin):
     '''Admin View for Transaction'''
 
     list_display = (
@@ -65,3 +68,6 @@ class TransactionAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     ordering = ('created_at',)
     radio_fields = {'transaction_type':admin.HORIZONTAL}
+
+    # Actions
+    actions = ['export_as_csv']
