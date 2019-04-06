@@ -2,7 +2,7 @@ from django.db import models
 from contacts.models import Contact
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
-
+from datetime import datetime
 
 DENE = 'dene'
 LENE = 'lene'
@@ -41,6 +41,7 @@ class Transaction(models.Model):
     description = models.TextField()
     amount  = models.PositiveIntegerField(default=0)
     transaction_type = models.CharField(max_length=4, choices=TRANSACTION_TYPES)
+    transaction_date = models.DateField(default=timezone.now)
     created_at = models.DateTimeField(default=timezone.now, editable=False)
     updated_at = models.DateTimeField(auto_now=True)
 
