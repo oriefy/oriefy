@@ -72,9 +72,10 @@ class TransactionAdmin(admin.ModelAdmin, ExportCsvMixin):
         'account',
         'amount',
         'transaction_type',
+        'transaction_date'
         )
-    list_filter = ('transaction_type', 'account')
-    raw_id_fields = ('account',)
+    list_filter = ('transaction_type', )
+    # raw_id_fields = ('account',)
     search_fields = ('account', 'description')
     date_hierarchy = 'created_at'
     ordering = ('created_at',)
