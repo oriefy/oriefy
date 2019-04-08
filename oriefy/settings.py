@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'expense',
     'contacts',
     'ledger',
-    'oriefy_site'
+    'oriefy_site',
+    'totalsum',
 ]
 
 MIDDLEWARE = [
