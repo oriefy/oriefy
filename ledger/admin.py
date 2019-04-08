@@ -4,6 +4,7 @@ from django.contrib.admin import site
 from django.db import models
 from django.forms import Textarea
 from oriefy.utils import ExportCsvMixin
+from totalsum.admin import TotalsumAdmin
 # Register your models here.
 
 class LedgerAdminSite(admin.AdminSite):
@@ -65,9 +66,10 @@ class AccountAdmin(admin.ModelAdmin, ExportCsvMixin):
 
 @admin.register(Transaction, site=ledger_admin_site)
 @admin.register(Transaction, site=site)
-class TransactionAdmin(admin.ModelAdmin, ExportCsvMixin):
+class TransactionAdmin(TotalsumAdmin, ExportCsvMixin):
     '''Admin View for Transaction'''
 
+    totalsum_list = ('amount',)
     list_display = (
         'account',
         'amount',
