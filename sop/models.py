@@ -1,5 +1,4 @@
 from django.db import models
-from memberships.models import Membership
 from django.urls import reverse
 
 
@@ -28,6 +27,7 @@ class Lesson(models.Model):
     slug = models.SlugField()
     title = models.CharField('Title', max_length=120)
     description = models.TextField('Description')
+    position = models.IntegerField()
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
     video_url = models.CharField(max_length=200)
     thumbnail = models.ImageField()

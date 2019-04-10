@@ -1,0 +1,28 @@
+{% block post_detail_link %}
+{% if object is not None %}
+	<li><a href="{{ object.course.get_absolute_url }}">{{ object.course.title }}</a></li>
+	<li>{{ object.title }}</li>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+	<div class='container'>
+		<h1>Lesson Detail View</h1>
+		<div class='row'>
+			<div class='col-sm-6 col-md-6'>
+				<h3>{{ object.title }}</h3>
+				<p>{{ object.description }}</p>
+				
+				<video controls
+					   controlsList="nodownload"
+					   poster="{{ object.thumbnail.url }}"
+				       src="{{ object.video_url }}"
+				       width="300"
+				       height="200">
+				    Sorry, your browser doesn't support embedded videos.
+				</video>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}

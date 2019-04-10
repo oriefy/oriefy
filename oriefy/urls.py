@@ -28,5 +28,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('team/admin', employee_admin_site.urls),
     path('ledger/', ledger_admin_site.urls),
+    path('sop/', include('sop.urls')),
     path('', include('oriefy_site.urls')),
 ]

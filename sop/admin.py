@@ -22,7 +22,6 @@ class CourseAdmin(admin.ModelAdmin):
                 'slug',
                 'title',
                 'description',
-                'allowed_memberships'
             )
         }),
     )
