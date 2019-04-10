@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'ledger',
     'oriefy_site',
     'totalsum',
+    'sop'
 ]
 
 MIDDLEWARE = [
